@@ -1,9 +1,13 @@
 import whois
-from datetime import datetime, timedelta
-import requests
+from datetime import datetime
 from utils.telegram import TelegramUtils
+from utils.emails import EmailUtils
+from utils.webhook import WebhookUtils
 
-
+def enviarAlerta(msg):
+    TelegramUtils.enviarAlerta(msg)
+    EmailUtils.enviarAlerta(msg)
+    WebhookUtils.enviarAlerta(msg)
 
 def verificar_expiracao(dominio):
     print(f"Verificando o domínio: {dominio}")
@@ -17,23 +21,21 @@ def verificar_expiracao(dominio):
 
     dias_restantes = (data_expiracao - datetime.now()).days
 
-    if dias_restantes > 30:
-        print(f"O domínio {dominio} expira em {dias_restantes} dias. Portanto, está OK.")
-
-    elif dias_restantes == 30:
-        TelegramUtils.enviarAlerta(f"📅 O domínio {dominio}  expira em {dias_restantes} dias. Ainda há tempo para renovar.")
+    if dias_restantes == 30:
+        enviarAlerta(f"📅 O domínio {dominio}  expira em {dias_restantes} dias. Ainda há tempo para renovar.")
     elif dias_restantes == 15:
-        TelegramUtils.enviarAlerta(f"📅 O domínio {dominio}  expira em {dias_restantes} dias. É recomendado renovar em breve.")
+        enviarAlerta(f"📅 O domínio {dominio}  expira em {dias_restantes} dias. É recomendado renovar em breve.")
     elif dias_restantes == 7:
-        TelegramUtils.enviarAlerta(f"📅 O domínio {dominio}  expira em {dias_restantes} dias. Renove o domínio o mais rápido possível.")
+        enviarAlerta(f"📅 O domínio {dominio}  expira em {dias_restantes} dias. Renove o domínio o mais rápido possível.")
     elif dias_restantes == 3:
-        TelegramUtils.enviarAlerta(f"📅‼️ O domínio {dominio}  expira em {dias_restantes} dias. A renovação é urgente.")
+        enviarAlerta(f"📅‼️ O domínio {dominio}  expira em {dias_restantes} dias. A renovação é urgente.")
     elif dias_restantes <= 3 and dias_restantes > 0:
-        TelegramUtils.enviarAlerta(f"⚠️⚠️ ALERTA CRÍTICO: O domínio {dominio}  expira em {dias_restantes} dias. Renove imediatamente!")
+        enviarAlerta(f"⚠️⚠️ ALERTA CRÍTICO: O domínio {dominio}  expira em {dias_restantes} dias. Renove imediatamente!")
     else:
-        TelegramUtils.enviarAlerta(f"☠️☠️ ALERTA CRÍTICO: O domínio {dominio}  expirou a {-dias_restantes} dias. Renove imediatamente!!")
+        enviarAlerta(f"☠️☠️ ALERTA CRÍTICO: O domínio {dominio}  expirou a {-dias_restantes} dias. Renove imediatamente!!")
 
 dominios = ["antonaji.com.br", "google.com"]
+
 for dominio in dominios:
     verificar_expiracao(dominio)
     print("-----------------------")
