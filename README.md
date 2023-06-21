@@ -4,7 +4,7 @@ Este script verifica a data de expiração de uma lista de domínios e envia ale
 
 ## Funcionamento
 
-O script possui uma lista de clientes e seus respectivos domínios no dicionário `dominios`. Ele percorre cada domínio e utiliza a biblioteca `python-whois` para obter a data de expiração do domínio. Em seguida, calcula a quantidade de dias restantes até a expiração e envia alertas via Telegram de acordo com a proximidade da data.
+O script possui uma lista de dominios. Ele percorre cada domínio e utiliza a biblioteca `python-whois` para obter a data de expiração do domínio. Em seguida, calcula a quantidade de dias restantes até a expiração e envia alertas via Telegram de acordo com a proximidade da data.
 
 O script utiliza a função `verificar_expiracao()` para verificar a expiração de cada domínio e enviar alertas. A função `enviarAlerta()` é responsável por enviar as mensagens via API do Telegram.
 
@@ -38,7 +38,7 @@ python verificador.py
 
 - Certifique-se de que o seu sistema possui conexão com a internet para que o script possa obter informações dos domínios.
 
-- O script já possui uma lista de clientes e domínios de exemplo. Você pode modificar essa lista de acordo com as suas necessidades, adicionando ou removendo clientes e domínios.
+- O script já possui uma lista de domínios de exemplo. Você pode modificar essa lista de acordo com as suas necessidades, adicionando ou removendo  domínios.
 
 - Os alertas são enviados para um chat ou grupo específico do Telegram. Certifique-se de fornecer o ID do chat correto na variável `chat_id` da função `enviarAlerta()`.
 
