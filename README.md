@@ -32,8 +32,8 @@ pip install python-whois python-dotenv
 
 3. Configure as informações de alertas no arquivo `.env`. Abra o arquivo `.env` em um editor de texto e preencha as configurações de alertas conforme necessário. 
 
-   Exemplo de arquivo `.env`:
-   ```
+Exemplo de arquivo `.env`:
+```
 TELEGRAM_TOKEN=<SEU_TOKEN_DO_TELEGRAM>
 TELEGRAM_CHAT_ID=<SEU_CHAT_ID_DO_TELEGRAM>""
 
@@ -44,7 +44,7 @@ SMTP_PASSWORD=<SUA_SENHA_SMTP>
 EMAIL_RECIPIENT=<EMAIL_DE_QUEM_RECEBERA_EMAILS>
 
 URL_WEBHOOK=<SUA_URL_DE_WEBHOOK>
-   ```
+```
 
 Certifique-se de substituir pelos valores corretos.
 
