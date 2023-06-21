@@ -21,7 +21,7 @@ def enviarAlerta(mensagem):
     else:
         print("❌ Falha ao enviar mensagem para o Telegram.")
 
-def verificar_expiracao(dominio, cliente):
+def verificar_expiracao(dominio):
     print(f"Verificando o domínio: {dominio}")
 
     w = whois.whois(dominio)
