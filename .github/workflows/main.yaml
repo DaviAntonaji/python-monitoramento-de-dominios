@@ -1,0 +1,31 @@
+name: Workflow
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+jobs:
+  verify:
+    name: Run workflow
+    runs-on: [self-hosted]
+    env:
+        TELEGRAM_TOKEN: ${{secrets.TELEGRAM_TOKEN}}
+        TELEGRAM_CHAT_ID: ${{secrets.TELEGRAM_CHAT_ID}}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip3 install -r requirements.txt
+
+      - name: Run Application
+        run: python app.py
